@@ -1,0 +1,187 @@
+{
+    "industries": [
+        "financial organisation",
+        "healthcare provider",
+        "government agency",
+        "technology company",
+        "energy company",
+        "educational institution"
+    ],
+
+
+    "events": {
+
+        "initial-access": [
+            "employees reported suspicious emails requesting urgent action",
+            "security monitoring detected suspicious login attempts against company services",
+            "a user reported receiving a link to a fake authentication portal"
+        ],
+
+
+        "execution": [
+            "endpoint monitoring detected an unknown process launching on a workstation",
+            "a suspicious script was executed after a user opened a document",
+            "security tools identified abnormal command-line activity"
+        ],
+
+
+        "persistence": [
+            "analysts discovered unauthorized changes allowing malicious software to survive system restarts",
+            "a workstation continued showing suspicious activity after rebooting",
+            "security monitoring detected a newly created persistence mechanism"
+        ],
+
+
+        "privilege-escalation": [
+            "a standard user account performed actions requiring administrator privileges",
+            "security monitoring detected suspicious privilege changes",
+            "an endpoint showed evidence of unauthorized elevated access"
+        ],
+
+
+        "defense-evasion": [
+            "security tools detected attempts to hide malicious activity",
+            "system settings were modified to avoid security detection",
+            "monitoring identified behaviour designed to bypass security controls"
+        ],
+
+
+        "credential-access": [
+            "authentication logs showed multiple failed logins followed by successful access",
+            "security software detected possible credential theft activity",
+            "a user account showed unusual authentication behaviour"
+        ],
+
+
+        "discovery": [
+            "a compromised workstation began collecting information about the internal environment",
+            "network discovery activity was detected from an employee device",
+            "commands were executed to gather system information"
+        ],
+
+
+        "lateral-movement": [
+            "a compromised workstation attempted access to additional internal systems",
+            "unusual internal authentication activity was detected",
+            "an attacker appeared to move between systems inside the organisation"
+        ],
+
+
+        "command-and-control": [
+            "an endpoint communicated with suspicious external infrastructure",
+            "network monitoring detected unusual outbound connections",
+            "encrypted traffic was observed between internal systems and unknown servers"
+        ],
+
+
+        "collection": [
+            "a compromised system accessed sensitive business documents",
+            "unusual file collection activity was detected",
+            "security monitoring identified suspicious data gathering"
+        ],
+
+
+        "exfiltration": [
+            "large amounts of sensitive data were transferred outside the organisation",
+            "a workstation uploaded files to an external service",
+            "unusual outbound traffic was detected during non-business hours"
+        ],
+
+
+        "impact": [
+            "critical systems showed signs of disruption",
+            "users reported inability to access important services",
+            "malicious activity affected normal business operations"
+        ]
+
+    },
+
+
+    "evidence_sources": {
+
+
+        "initial-access": [
+            "email security logs",
+            "authentication logs",
+            "web proxy logs"
+        ],
+
+
+        "execution": [
+            "endpoint telemetry",
+            "process execution logs",
+            "command-line activity"
+        ],
+
+
+        "persistence": [
+            "Windows event logs",
+            "registry changes",
+            "endpoint telemetry"
+        ],
+
+
+        "privilege-escalation": [
+            "privilege audit logs",
+            "identity provider logs",
+            "endpoint telemetry"
+        ],
+
+
+        "defense-evasion": [
+            "security tool alerts",
+            "system configuration changes",
+            "endpoint logs"
+        ],
+
+
+        "credential-access": [
+            "authentication logs",
+            "identity provider logs",
+            "credential monitoring alerts"
+        ],
+
+
+        "discovery": [
+            "network monitoring data",
+            "endpoint activity logs",
+            "command execution logs"
+        ],
+
+
+        "lateral-movement": [
+            "authentication logs",
+            "network traffic logs",
+            "remote access logs"
+        ],
+
+
+        "command-and-control": [
+            "firewall logs",
+            "DNS telemetry",
+            "network traffic analysis"
+        ],
+
+
+        "collection": [
+            "file access logs",
+            "endpoint monitoring",
+            "data access records"
+        ],
+
+
+        "exfiltration": [
+            "network flow logs",
+            "data loss prevention alerts",
+            "proxy logs"
+        ],
+
+
+        "impact": [
+            "system monitoring alerts",
+            "application logs",
+            "incident response reports"
+        ]
+
+    }
+}
