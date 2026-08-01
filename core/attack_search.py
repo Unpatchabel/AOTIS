@@ -72,3 +72,19 @@ def search_by_keyword(search_term):
             results.append(tech)
 
     return results
+
+def get_all_techniques(limit=200):
+    """Return a list of techniques for dropdowns and random selection."""
+
+    technique_list = []
+
+    for tech in techniques[:limit]:
+        technique_list.append({
+            "id": get_attack_id(tech),
+            "name": tech.get("name", "Unknown"),
+            "tactics": get_tactics(tech),
+            "description": tech.get("description", "")
+        })
+
+    return technique_list
+

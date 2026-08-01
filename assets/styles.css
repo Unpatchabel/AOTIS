@@ -1,0 +1,480 @@
+/* ==========================================================
+   AOTIS CYBER UI THEME
+   Threat Intelligence / SOC Dashboard Style
+========================================================== */
+
+
+/* ==========================================================
+   GLOBAL APPLICATION BACKGROUND
+========================================================== */
+
+.stApp {
+
+    background-image:
+        linear-gradient(
+            rgba(5,10,25,0.78),
+            rgba(5,10,25,0.90)
+        ),
+        url("./assets/banner.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    color:#e5e7eb;
+
+    font-family:"Inter", sans-serif;
+}
+
+
+/* CONTENT SPACING */
+
+.block-container {
+
+    padding-top:2rem;
+    padding-bottom:3rem;
+
+}
+
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+
+h1,h2,h3 {
+
+    color:white !important;
+
+    font-weight:800;
+
+}
+
+
+p,
+label,
+span {
+
+    color:#e5e7eb !important;
+
+}
+
+
+[data-testid="stMarkdownContainer"] {
+
+    color:#e5e7eb;
+
+}
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+
+section[data-testid="stSidebar"] {
+
+    background:
+        linear-gradient(
+            rgba(10,15,30,0.92),
+            rgba(5,10,20,0.92)
+        );
+
+    backdrop-filter:blur(15px);
+
+    border-right:
+        1px solid rgba(255,255,255,0.08);
+
+}
+
+
+section[data-testid="stSidebar"] * {
+
+    color:white !important;
+
+}
+
+
+/* ==========================================================
+   METRIC CARDS
+========================================================== */
+
+
+[data-testid="metric-container"] {
+
+    background:
+        rgba(17,24,39,0.78);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.35);
+
+}
+
+
+/* ==========================================================
+   AOTIS FIRE BUTTONS
+========================================================== */
+
+
+.stButton > button {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff0000,
+            #ff6600,
+            #ffcc00
+        ) !important;
+
+
+    color:white !important;
+
+
+    border:none !important;
+
+
+    border-radius:14px;
+
+
+    padding:
+        0.7rem 1.8rem;
+
+
+    font-weight:800;
+
+
+    box-shadow:
+
+        0 5px 20px rgba(255,80,0,0.45);
+
+
+    transition:0.25s ease;
+
+}
+
+
+
+.stButton > button:hover {
+
+    transform:
+        translateY(-3px);
+
+
+    box-shadow:
+
+        0 10px 30px rgba(255,140,0,0.65);
+
+}
+
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+
+.stTextInput input {
+
+    background:
+        rgba(17,24,39,0.85) !important;
+
+
+    color:white !important;
+
+
+    border-radius:12px;
+
+}
+
+
+.stSelectbox div,
+.stRadio div {
+
+    color:white !important;
+
+}
+
+
+/* ==========================================================
+   CUSTOM INCIDENT SCENARIO CARD
+========================================================== */
+
+
+.scenario-box {
+
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,70,0,0.35),
+            rgba(120,0,0,0.85)
+        );
+
+
+    border:
+
+        1px solid rgba(255,80,0,0.8);
+
+
+    border-left:
+
+        8px solid #ff4500;
+
+
+    border-radius:
+
+        18px;
+
+
+    padding:
+
+        25px;
+
+
+    color:white !important;
+
+
+    box-shadow:
+
+        0 0 30px rgba(255,80,0,0.35);
+
+
+    backdrop-filter:
+
+        blur(15px);
+
+}
+
+
+
+.scenario-box p,
+.scenario-box span,
+.scenario-box div {
+
+    color:white !important;
+
+}
+
+
+
+/* ==========================================================
+   QUIZ OPTIONS
+========================================================== */
+
+
+.stRadio label {
+
+    background:
+
+        rgba(15,23,42,0.70);
+
+
+    border-radius:
+
+        12px;
+
+
+    padding:
+
+        10px;
+
+}
+
+
+
+/* ==========================================================
+   REPORT CARD
+========================================================== */
+
+
+.report-box {
+
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,70,0,0.25),
+            rgba(80,0,0,0.75)
+        );
+
+
+    color:white;
+
+
+    padding:
+
+        20px;
+
+
+    border-radius:
+
+        16px;
+
+
+    border-left:
+
+        6px solid orange;
+
+}
+
+
+
+/* ==========================================================
+   EXPANDERS
+========================================================== */
+
+
+[data-testid="stExpander"] {
+
+    background:
+
+        rgba(15,23,42,0.75);
+
+
+    border-radius:
+
+        15px;
+
+
+    border:
+
+        1px solid rgba(255,255,255,0.1);
+
+}
+
+
+
+/* ==========================================================
+   TOP BAR + FOOTER
+========================================================== */
+
+
+header[data-testid="stHeader"] {
+
+    background:transparent;
+
+}
+
+
+footer {
+
+    visibility:hidden;
+
+}
+
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+
+::-webkit-scrollbar {
+
+    width:10px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+    background:#050a19;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background:#991b1b;
+
+    border-radius:10px;
+
+}
+
+/* ==========================================================
+   AOTIS STATUS CARDS
+========================================================== */
+
+
+.status-card {
+
+    padding:20px;
+
+    border-radius:16px;
+
+    backdrop-filter:blur(12px);
+
+    color:white !important;
+
+    font-size:1rem;
+
+    line-height:1.6;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* Success */
+
+.success-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,180,70,0.35),
+            rgba(0,70,30,0.85)
+        );
+
+    border-left:
+        7px solid #22c55e;
+
+}
+
+
+
+/* Danger */
+
+.danger-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,0,0,0.35),
+            rgba(90,0,0,0.85)
+        );
+
+    border-left:
+        7px solid #ef4444;
+
+}
+
+
+
+/* Warning */
+
+.warning-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,150,0,0.35),
+            rgba(100,50,0,0.85)
+        );
+
+    border-left:
+        7px solid #ff9800;
+
+}
