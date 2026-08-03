@@ -7,7 +7,6 @@ from core.attack_search import (
     search_by_id,
     search_by_keyword,
     get_attack_id,
-    get_tactics,
     get_technique_count,
     get_all_techniques
 )
@@ -28,7 +27,7 @@ st.set_page_config(
 )
 
 # ----------------------------------------------------------
-# BACKGROUND IMAGE
+# BACKGROUND IMAGE ONLY
 # ----------------------------------------------------------
 
 def set_background(image_path: str):
@@ -54,44 +53,6 @@ def set_background(image_path: str):
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }}
-
-            .block-container {{
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }}
-
-            h1, h2, h3 {{
-                color: white;
-            }}
-
-            section[data-testid="stSidebar"] {{
-                background: rgba(10,15,30,0.82);
-                backdrop-filter: blur(10px);
-            }}
-
-            [data-testid="metric-container"] {{
-                background: rgba(17,24,39,0.72);
-                border-radius: 18px;
-                padding: 18px;
-                border: 1px solid rgba(255,255,255,0.08);
-            }}
-
-            .stButton>button {{
-                background: linear-gradient(90deg, #2563eb, #7c3aed);
-                color: white;
-                border: none;
-                border-radius: 12px;
-                font-weight: 700;
-                padding: 0.6rem 1.2rem;
-            }}
-
-            .stButton>button:hover {{
-                transform: translateY(-2px);
-            }}
-
-            footer {{
-                visibility: hidden;
-            }}
             </style>
             """,
             unsafe_allow_html=True
@@ -99,6 +60,16 @@ def set_background(image_path: str):
 
 # Apply wallpaper
 set_background("assets/banner.png")
+
+# ----------------------------------------------------------
+# LOAD EXTERNAL CSS
+# ----------------------------------------------------------
+
+css_path = Path("assets/styles.css")
+
+if css_path.exists():
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # ----------------------------------------------------------
 # HEADER
@@ -135,6 +106,7 @@ page = st.sidebar.radio(
         "Reports"
     ]
 )
+
 # ----------------------------------------------------------
 # DASHBOARD
 # ----------------------------------------------------------
@@ -153,22 +125,13 @@ if page == "Dashboard":
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric(
-            "ATT&CK Techniques",
-            get_technique_count()
-        )
+        st.metric("ATT&CK Techniques", get_technique_count())
 
     with col2:
-        st.metric(
-            "Exercises Generated",
-            "0"
-        )
+        st.metric("Exercises Generated", "0")
 
     with col3:
-        st.metric(
-            "Training Score",
-            "0%"
-        )
+        st.metric("Training Score", "0%")
 
     st.divider()
 
@@ -177,28 +140,26 @@ if page == "Dashboard":
     c1, c2 = st.columns(2)
 
     with c1:
-         st.markdown(
-        """
-        <div class="report-box">
-         Phishing & Initial Access<br><br>
-        T1566 - Phishing
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
+        st.markdown(
+            """
+            <div class="warning-card">
+            <b>Phishing & Initial Access</b><br><br>
+            T1566 - Phishing
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
     with c2:
-         st.markdown(
-        """
-        <div class="report-box">
-         Data Exfiltration<br><br>
-        T1567 - Exfiltration Over Web Service
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
+        st.markdown(
+            """
+            <div class="danger-card">
+            <b>Data Exfiltration</b><br><br>
+            T1567 - Exfiltration Over Web Service
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
 # ----------------------------------------------------------
 # ATT&CK EXPLORER
@@ -210,36 +171,27 @@ elif page == "ATT&CK Explorer":
 
     mode = st.radio(
         "Search Mode",
-        [
-            "Technique ID",
-            "Keyword"
-        ]
+        ["Technique ID", "Keyword"]
     )
 
-    query = st.text_input(
-        "Enter ATT&CK ID or Keyword"
-    )
-
+    query = st.text_input("Enter ATT&CK ID or Keyword")
 
     if st.button("Search"):
 
         if mode == "Technique ID":
             results = search_by_id(query)
-
         else:
             results = search_by_keyword(query)
 
-
         if results:
 
-            
             st.markdown(
-                 f"""
-                 <div class="report-box">
-                 Found {len(results)} result(s)
-                 </div>
-                 """,
-                 unsafe_allow_html=True
+                f"""
+                <div class="report-box">
+                Found {len(results)} result(s)
+                </div>
+                """,
+                unsafe_allow_html=True
             )
 
             for tech in results[:10]:
@@ -249,19 +201,13 @@ elif page == "ATT&CK Explorer":
                 )
 
                 st.write(
-                    tech.get(
-                        "description",
-                        "No description"
-                    )
+                    tech.get("description", "No description")
                 )
 
                 st.divider()
 
         else:
-            st.warning(
-                "No techniques found."
-            )
-
+            st.warning("No techniques found.")
 
 # ----------------------------------------------------------
 # TABLETOP SIMULATOR
@@ -271,83 +217,51 @@ elif page == "Tabletop Simulator":
 
     st.header("Tabletop Simulator")
 
-
     techniques = get_all_techniques()
-
 
     if st.button("Generate Random Exercise"):
 
-        selected = random.choice(
-            techniques
-        )
+        selected = random.choice(techniques)
 
         st.session_state.exercise = {
-
             "technique": selected,
-
             "scenario": generate_scenario(selected),
-
             "quiz": generate_quiz(selected)
-
         }
 
-
-    exercise = st.session_state.get(
-        "exercise"
-    )
-
+    exercise = st.session_state.get("exercise")
 
     if exercise:
 
-        st.subheader(
-            "Incident Scenario"
-        )
-
+        st.subheader("🚨 Incident Scenario")
 
         st.markdown(
             f"""
             <div class="scenario-box">
-
             {exercise["scenario"].replace("\n", "<br>")}
-
             </div>
             """,
-
             unsafe_allow_html=True
-
         )
-
 
         quiz = exercise["quiz"]
 
-
-        st.subheader(
-            "Analyst Decision ?"
-        )
-
+        st.subheader("🧠 Analyst Decision")
 
         answer = st.radio(
-
             quiz["question"],
-
             quiz["options"],
-
             key="quiz_answer"
-
         )
 
-
         if st.button("Submit Answer"):
-
 
             if answer == quiz["answer"]:
 
                 st.markdown(
                     """
-                    <div class="status-card success-card">
-
+                    <div class="report-box">
                     ✅ Correct! Threat assessment completed.
-
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -357,24 +271,17 @@ elif page == "Tabletop Simulator":
 
                 st.markdown(
                     f"""
-                    <div class="status-card danger-card">
-
+                    <div class="danger-card">
                     ❌ Incorrect.<br><br>
-
-                    Correct answer:
+                    Correct answer:<br>
                     <b>{quiz['answer']}</b>
-
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
 
-
     else:
-
-        st.info(
-            "Generate an exercise to begin the simulation."
-        )
+        st.info("Generate an exercise to begin the simulation.")
 
 # ----------------------------------------------------------
 # REPORTS
@@ -385,10 +292,10 @@ elif page == "Reports":
     st.header("Reports")
 
     st.markdown(
-    """
-    <div class="report-box">
-    Generated investigation reports will appear here.
-    </div>
-    """,
-    unsafe_allow_html=True
-) 
+        """
+        <div class="report-box">
+        Generated investigation reports will appear here.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
