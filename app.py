@@ -21,8 +21,8 @@ from core.scenario_engine import (
 # ----------------------------------------------------------
 
 st.set_page_config(
-    page_title="AOTIS",
-    page_icon="🛡️",
+    page_title="TALOS",
+    page_icon="assets/logo.png",
     layout="wide"
 )
 
@@ -41,10 +41,10 @@ def set_background(image_path: str):
             f"""
             <style>
             .stApp {{
-                background:
+                background-image:
                     linear-gradient(
-                        rgba(5,10,25,0.75),
-                        rgba(5,10,25,0.88)
+                        rgba(0,0,0,0.30),
+                        rgba(0,0,0,0.52)
                     ),
                     url("data:image/png;base64,{encoded}");
 
@@ -71,29 +71,11 @@ if css_path.exists():
     with open(css_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# ----------------------------------------------------------
-# HEADER
-# ----------------------------------------------------------
-
-st.markdown(
-    """
-    <h1 style='margin-bottom:0;'>🛡️ TALOS</h1>
-
-    <p style='font-size:1.1rem;color:#cbd5e1;'>
-    AI-Driven OSINT Threat Awareness & Tabletop Platform
-    </p>
-    """,
-    unsafe_allow_html=True
-)
 
 # ----------------------------------------------------------
 # SIDEBAR
 # ----------------------------------------------------------
 
-logo_path = Path("assets/logo.png")
-
-if logo_path.exists():
-    st.sidebar.image(str(logo_path), width=120)
 
 st.sidebar.title("Navigation")
 
@@ -113,13 +95,30 @@ page = st.sidebar.radio(
 
 if page == "Dashboard":
 
-    st.header("Threat Awareness Dashboard")
+    st.markdown(
+        """
+        <div class="hero-panel">
 
-    st.write(
-        """
-        Welcome to **TALOS**, an AI-driven OSINT threat awareness
-        and tabletop exercise platform powered by MITRE ATT&CK.
-        """
+        <h1>TALOS</h1>
+
+        <p style="font-size:1.1rem;">
+        Your Personal Threat Awareness & Training Platform
+        </p>
+
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,0.08);margin:18px 0;">
+
+        <h2>Threat Awareness Dashboard</h2>
+
+        <p>
+        TALOS is an AI-driven OSINT threat awareness and tabletop exercise platform
+        powered by MITRE ATT&CK. It provides interactive analyst training,
+        scenario-based exercises, and threat intelligence exploration in a single
+        unified environment.
+        </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
     col1, col2, col3 = st.columns(3)
@@ -133,7 +132,7 @@ if page == "Dashboard":
     with col3:
         st.metric("Training Score", "0%")
 
-    st.divider()
+    st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
     st.subheader("Current Threat Focus")
 
@@ -160,7 +159,6 @@ if page == "Dashboard":
             """,
             unsafe_allow_html=True
         )
-
 # ----------------------------------------------------------
 # ATT&CK EXPLORER
 # ----------------------------------------------------------
@@ -213,11 +211,93 @@ elif page == "ATT&CK Explorer":
 # TABLETOP SIMULATOR
 # ----------------------------------------------------------
 
+# ----------------------------------------------------------
+# TABLETOP SIMULATOR
+# ----------------------------------------------------------
+
 elif page == "Tabletop Simulator":
 
     st.header("Tabletop Simulator")
 
     techniques = get_all_techniques()
+
+    role = st.selectbox(
+        "Training Role",
+        [
+            "Student",
+            "IT Support",
+            "Junior SOC Analyst",
+            "Junior Pentester",
+            "SOC Analyst",
+            "Pentester",
+            "Senior SOC Analyst",
+            "Senior Pentester",
+            "Threat Hunter",
+            "Incident Responder"
+        ]
+    )
+
+    # ------------------------------------------------------
+    # ROLE GUIDE
+    # ------------------------------------------------------
+
+    st.markdown(
+        """
+        <div class="role-box">
+
+        <div class="role-label">Role Guide</div>
+
+        <table style="width:100%; border-collapse:collapse; color:white; font-size:0.95rem;">
+            <tr>
+                <td style="padding:6px 0;"><b>Student</b></td>
+                <td style="padding:6px 0;">Basic cybersecurity awareness and terminology.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>IT Support</b></td>
+                <td style="padding:6px 0;">Basic troubleshooting and endpoint review.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Junior SOC Analyst</b></td>
+                <td style="padding:6px 0;">Alert triage and initial investigation steps.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Junior Pentester</b></td>
+                <td style="padding:6px 0;">Reconnaissance and basic attack understanding.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>SOC Analyst</b></td>
+                <td style="padding:6px 0;">Evidence analysis and incident investigation.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Pentester</b></td>
+                <td style="padding:6px 0;">Attack path analysis and security testing.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Senior SOC Analyst</b></td>
+                <td style="padding:6px 0;">Advanced incident analysis and containment.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Senior Pentester</b></td>
+                <td style="padding:6px 0;">Advanced offensive security reasoning.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Threat Hunter</b></td>
+                <td style="padding:6px 0;">Hypothesis-driven hunting and detection development.</td>
+            </tr>
+            <tr>
+                <td style="padding:6px 0;"><b>Incident Responder</b></td>
+                <td style="padding:6px 0;">Containment, eradication, and recovery decision-making.</td>
+            </tr>
+        </table>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # ------------------------------------------------------
+    # GENERATE EXERCISE
+    # ------------------------------------------------------
 
     if st.button("Generate Random Exercise"):
 
@@ -226,14 +306,18 @@ elif page == "Tabletop Simulator":
         st.session_state.exercise = {
             "technique": selected,
             "scenario": generate_scenario(selected),
-            "quiz": generate_quiz(selected)
+            "quiz": generate_quiz(selected, role)
         }
 
     exercise = st.session_state.get("exercise")
 
+    # ------------------------------------------------------
+    # DISPLAY EXERCISE
+    # ------------------------------------------------------
+
     if exercise:
 
-        st.subheader("🚨 Incident Scenario")
+        st.subheader("Incident Scenario")
 
         st.markdown(
             f"""
@@ -246,7 +330,24 @@ elif page == "Tabletop Simulator":
 
         quiz = exercise["quiz"]
 
-        st.subheader("🧠 Analyst Decision")
+        st.markdown(
+            f"""
+            <div class="role-box">
+
+                <div class="role-label">Training Role</div>
+                <div class="role-value">{quiz['role']}</div>
+
+                <div style="height:14px;"></div>
+
+                <div class="role-label">Difficulty</div>
+                <div class="role-value">{quiz['difficulty'].replace('_', ' ').title()}</div>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.subheader("Analyst Decision")
 
         answer = st.radio(
             quiz["question"],
@@ -261,7 +362,7 @@ elif page == "Tabletop Simulator":
                 st.markdown(
                     """
                     <div class="report-box">
-                    ✅ Correct! Threat assessment completed.
+                    Correct. Threat assessment completed.
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -272,7 +373,7 @@ elif page == "Tabletop Simulator":
                 st.markdown(
                     f"""
                     <div class="danger-card">
-                    ❌ Incorrect.<br><br>
+                    Incorrect.<br><br>
                     Correct answer:<br>
                     <b>{quiz['answer']}</b>
                     </div>
@@ -281,8 +382,15 @@ elif page == "Tabletop Simulator":
                 )
 
     else:
-        st.info("Generate an exercise to begin the simulation.")
 
+        st.markdown(
+            """
+            <div class="role-box">
+            Select a training role and generate an exercise to begin the simulation.
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 # ----------------------------------------------------------
 # REPORTS
 # ----------------------------------------------------------

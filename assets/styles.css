@@ -2,38 +2,14 @@
    TALOS / AOTIS CYBER UI THEME
 ========================================================== */
 
-
 /* ==========================================================
-   GLOBAL BACKGROUND
+   GLOBAL APP BASE
 ========================================================== */
 
 .stApp {
-
-    background-image:
-        linear-gradient(
-            rgba(5,10,25,0.78),
-            rgba(5,10,25,0.90)
-        ),
-        url("./assets/banner.png");
-
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-
     color:#e5e7eb;
     font-family:"Inter", sans-serif;
-
 }
-
-
-
-.block-container {
-
-    padding-top:2rem;
-    padding-bottom:3rem;
-
-}
-
 
 /* ==========================================================
    TEXT
@@ -245,33 +221,97 @@ section[data-testid="stSidebar"] * {
 }
 
 
-
 /* ==========================================================
-   QUIZ OPTIONS
+   QUIZ OPTIONS - SOC DECISION CARDS
 ========================================================== */
 
+.stRadio > div {
+    gap: 14px;
+}
 
-.stRadio label {
+/* Individual option card */
+.stRadio [role="radiogroup"] > label {
 
+    display: block;
+    width: 100%;
 
     background:
+        linear-gradient(
+            135deg,
+            rgba(18,26,42,0.88),
+            rgba(28,38,58,0.82)
+        );
 
-        rgba(15,23,42,0.75);
+    border:
+        1px solid rgba(255,255,255,0.06);
 
+    border-radius: 18px;
 
-    border-radius:12px;
+    padding: 15px 18px;
 
-    padding:10px;
+    margin-bottom: 12px;
 
+    cursor: pointer;
+
+    transition: all 0.22s ease;
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,0.22);
 
 }
 
+/* Hover state */
+.stRadio [role="radiogroup"] > label:hover {
 
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(28,38,58,0.92),
+            rgba(42,56,82,0.88)
+        );
+
+    border-color:
+        rgba(255,140,0,0.35);
+
+    box-shadow:
+        0 10px 26px rgba(255,120,0,0.18);
+
+}
+
+/* Text */
+.stRadio [role="radiogroup"] > label span {
+
+    color: #f8fafc !important;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+}
+
+/* Selected option */
+.stRadio [role="radiogroup"] > label:has(input:checked) {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,120,0,0.18),
+            rgba(120,20,0,0.42)
+        );
+
+    border:
+        2px solid rgba(255,170,0,0.72);
+
+    box-shadow:
+        0 0 18px rgba(255,140,0,0.24);
+
+}
 
 /* ==========================================================
    DASHBOARD THREAT CARDS
 ========================================================== */
-
 
 .warning-card {
 
@@ -304,9 +344,6 @@ section[data-testid="stSidebar"] * {
         0 0 25px rgba(255,170,0,0.35);
 
 }
-
-
-
 
 .danger-card {
 
@@ -418,5 +455,91 @@ header[data-testid="stHeader"] {
 footer {
 
     visibility:hidden;
+
+}
+
+/* ==========================================================
+   HERO PANEL
+========================================================== */
+
+.hero-panel {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10,15,30,0.92),
+            rgba(5,10,25,0.90)
+        );
+
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 28px;
+    backdrop-filter: none;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    transition: opacity 0.15s ease, background 0.15s ease;
+    will-change: opacity, background;
+}
+
+.hero-panel h1,
+.hero-panel h2,
+.hero-panel h3,
+.hero-panel p {
+
+    margin-top: 0;
+    color: white !important;
+
+}
+
+/* ==========================================================
+   TRAINING ROLE PANEL
+========================================================== */
+
+.role-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(18,26,42,0.88),
+            rgba(28,38,58,0.82)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius: 18px;
+
+    padding: 18px 20px;
+
+    margin: 10px 0 20px 0;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.22);
+
+}
+
+
+.role-label {
+
+    font-size: 0.78rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: #94a3b8 !important;
+
+    margin-bottom: 6px;
+
+}
+
+
+.role-value {
+
+    font-size: 1.05rem;
+
+    font-weight: 700;
+
+    color: #f8fafc !important;
 
 }
